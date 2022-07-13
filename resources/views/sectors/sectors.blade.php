@@ -1,6 +1,6 @@
-@extends('...admin.layouts.layout')
+@extends('...layouts.layout')
 @section('title')
-    Wallet || Action Lists
+    P4D || Sectors Lists
 @endsection
 
 @section('extra_css')
@@ -16,12 +16,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Action Lists</h1>
+                    <h1>Sectors Lists</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                        <li class="breadcrumb-item active">Action Lists</li>
+                        <li class="breadcrumb-item active">Sectors Lists</li>
                     </ol>
                 </div>
             </div>
@@ -35,67 +35,42 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Action Lists</h3>
+                            <h3 class="card-title">Sectors Lists</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Title</th>
-                                        <th>Reward</th>
-                                        <th>Assigned User</th>
-                                        <th>Description</th>
-                                        <th>Start Date</th>
-                                        <th>End Date</th>
+                                        <th>Sector Name</th>
+                                        <th>No. Files</th>
+                                        <th>Status</th>
                                         <th>Actions</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($action_lists as $item)
+                                    @foreach ($sectors as $sector)
                                         <tr>
-                                            <td>{{ $item->title }}</td>
-                                            <td>{{ $item->reward->title }}</td>
-                                            <td>{{ $item->user->name }}</td>
-                                            <td>{{ $item->description }}</td>
-                                            <td>{{ $item->start_date }}</td>
-                                            <td>{{ $item->end_date }}</td>
+                                            <td>{{ $sector['name'] }}</td>
+                                            <td>{{ count($sectors) }}</td>
+                                            <td>{{ $sector['enabled'] }}</td>
                                             <td> <button type="button" class="btn btn-default" data-toggle="modal"
-                                                    data-target="#modal-default{{ $item->id }}"> <i
-                                                        class="fas fa-edit"></i></button>
-                                                @if ($item->status != 2)
-                                                    <button type="button" class="btn btn-info" data-toggle="modal"
-                                                        data-target="#modal-complete{{ $item->id }}"> <i
-                                                            class="fas fa-check"></i></button>
-                                                @endif
+                                                    data-target="#modal-edit-sector{{$sector['id']}}"> <i class="fas fa-edit"></i></button>
+
                                                 <button type="button" class="btn btn-default" data-toggle="modal"
-                                                    data-target="#modal-delete{{ $item->id }}"> <i
-                                                        class="fas fa-trash"></i> </button>
+                                                    data-target="#modal-delete-sector{{$sector['id']}}"> <i class="fas fa-trash"></i>
+                                                </button>
                                             </td>
                                         </tr>
-                                        @include(
-                                            'admin.action_lists.edit_action_list',
-                                            compact('item', 'rewards', 'users')
-                                        )
-                                        @include(
-                                            'admin.action_lists.delete_action_list',
-                                            compact('item')
-                                        )
-                                        @include(
-                                            'admin.action_lists.complete_dialog',
-                                            compact('item')
-                                        )
+                                        @include('sectors.edit_sector', compact('sector'))
+                                        @include('sectors.delete_sector', compact('sector'))
                                     @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Title</th>
-                                        <th>Reward</th>
-                                        <th>Assigned User</th>
-                                        <th>Description</th>
-                                        <th>Start Date</th>
-                                        <th>End Date</th>
+                                        <th>Sector Name</th>
+                                        <th>No. Files</th>
+                                        <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </tfoot>

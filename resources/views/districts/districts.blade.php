@@ -71,8 +71,8 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Country Name</th>
-                                        <th>No. Districts</th>
+                                        <th>District Name</th>
+                                        <th>No. Sectors</th>
                                         <th>Status</th>
                                         <th>Actions</th>
                                     </tr>

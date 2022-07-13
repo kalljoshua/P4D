@@ -1,4 +1,4 @@
-@extends('...admin.layouts.layout')
+@extends('...layouts.layout')
 @section('title')
     P4D || Add Sector
 @endsection
@@ -38,14 +38,14 @@
                                     <label for="exampleInputEmail1">Sector Name</label>
                                     <input type="hidden" name="status" value="1">
                                     <input type="text" class="form-control" name="name" id="exampleInputEmail1"
-                                        placeholder="District Name">
+                                        placeholder="Sector Name">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Select District</label>
-                                    <select class="form-control selectpicker" name="user_id">
+                                    <select class="form-control selectpicker" name="districtId">
                                         <option value="">--Select--</option> 
-                                        @foreach ($users as $user)
-                                            <option value="{{ $user->id }}"> {{ $user->name }}</option>
+                                        @foreach ($districts as $district)
+                                            <option value="{{ $district['id'] }}"> {{ $district['name'] }}</option>
                                         @endforeach
                                     </select>
                                 </div>

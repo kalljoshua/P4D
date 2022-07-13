@@ -37,8 +37,11 @@ Route::post('/{district_id}/delete-district', 'App\Http\Controllers\CountriesCon
 Route::post('/{district_id}/edit-district', 'App\Http\Controllers\CountriesController@editDistrict')->name('edit-district');
 
 Route::get('/sectors', 'App\Http\Controllers\SectorsController@getSectors')->name('sectors');
+Route::get('/district-sectors', 'App\Http\Controllers\SectorsController@getDistrictSectors')->name('district-sectors');
 Route::get('/add-sectors', 'App\Http\Controllers\SectorsController@addSector')->name('add-sector');
-Route::post('/add-sectors/{districtId}', 'App\Http\Controllers\SectorsController@postSector')->name('post-sector');
+Route::post('/add-sectors', 'App\Http\Controllers\SectorsController@postSector')->name('post-sector');
+Route::post('/{sector_id}/delete-sector', 'App\Http\Controllers\CountriesController@deleteSector')->name('delete-sector');
+Route::post('/{sector_id}/edit-sector', 'App\Http\Controllers\CountriesController@editSector')->name('edit-sector');
 
 Route::get('/plans', 'App\Http\Controllers\FilesController@getPlanFiles')->name('plans');
 Route::get('/create-plan', 'App\Http\Controllers\FilesController@createPlan')->name('create-plan');

@@ -11,8 +11,23 @@ class SectorService
         $this->repository = $repository;
     }
 
-    public function getSectors($districtId)
+    public function getSectors()
     {
-        return $this->repository->getSectors($districtId);
+        return $this->repository->getSectors();
+    }
+
+    public function getDistrictSectors($districtId)
+    {
+        return $this->repository->getDistrictSectors($districtId);
+    }
+
+    public function postSector($request)
+    {
+        return $this->repository->postSector($request);
+    }
+
+    public function deleteSector($sectorId)
+    {
+        return $this->repository->deleteSector($sectorId);
     }
 }
