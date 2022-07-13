@@ -2,6 +2,7 @@
 
 namespace App\Core\district;
 
+use Illuminate\Support\Facades\Session;
 use GuzzleHttp\Client;
 
 class DistrictRepository implements IDistrictRepository
@@ -30,8 +31,9 @@ class DistrictRepository implements IDistrictRepository
 
     public function postDistricts($request)
     {
-        $userToken = $request->session()->get('userToken');
+        $userToken = Session::get('userToken');
         $countryId = $request->countryId;
+        
         $response = $this->client->post(
             '/district/add/' . $countryId,
             [
@@ -45,6 +47,14 @@ class DistrictRepository implements IDistrictRepository
         $assoc = json_decode($data, true);
 
         dd($assoc['sectors']);
+        return $assoc;
+    }
+
+    public function deleteDistrict($districtId)
+    {
+        $response = $this->client->delete('/district/delete/' . $districtId);
+        $data = $response->getBody();
+        $assoc = json_decode($data, true);
         return $assoc;
     }
 }

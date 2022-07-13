@@ -1,4 +1,8 @@
-@extends('...admin.layouts.layout')
+<?php
+//dd($countries);
+//dd($countries[0]['districts']);
+?>
+@extends('...layouts.layout')
 @section('title')
     P4D || Countries
 @endsection
@@ -42,56 +46,36 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Title</th>
-                                        <th>Reward</th>
+                                        <th>Country Name</th>
+                                        <th>No. Districts</th>
+                                        <th>Status</th>
                                         <th>Actions</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($action_lists as $item)
+                                    @foreach ($countries as $country)
                                         <tr>
-                                            <td>{{ $item->title }}</td>
-                                            <td>{{ $item->reward->title }}</td>
-                                            <td>{{ $item->user->name }}</td>
-                                            <td>{{ $item->description }}</td>
-                                            <td>{{ $item->start_date }}</td>
-                                            <td>{{ $item->end_date }}</td>
+                                            <td>{{ $country['name'] }}</td>
+                                            <td>{{ count($country['districts']) }}</td>
+                                            <td>{{ $country['enabled'] }}</td>
                                             <td> <button type="button" class="btn btn-default" data-toggle="modal"
-                                                    data-target="#modal-default{{ $item->id }}"> <i
-                                                        class="fas fa-edit"></i></button>
-                                                @if ($item->status != 2)
-                                                    <button type="button" class="btn btn-info" data-toggle="modal"
-                                                        data-target="#modal-complete{{ $item->id }}"> <i
-                                                            class="fas fa-check"></i></button>
-                                                @endif
+                                                    data-target="#modal-edit-country"> <i class="fas fa-edit"></i></button>
+
                                                 <button type="button" class="btn btn-default" data-toggle="modal"
-                                                    data-target="#modal-delete{{ $item->id }}"> <i
-                                                        class="fas fa-trash"></i> </button>
+                                                    data-target="#modal-delete-country"> <i class="fas fa-trash"></i>
+                                                </button>
                                             </td>
                                         </tr>
-                                        @include(
-                                            'admin.action_lists.edit_action_list',
-                                            compact('item', 'rewards', 'users')
-                                        )
-                                        @include(
-                                            'admin.action_lists.delete_action_list',
-                                            compact('item')
-                                        )
-                                        @include(
-                                            'admin.action_lists.complete_dialog',
-                                            compact('item')
-                                        )
+                                        @include('countries.edit_country', compact('country'))
+                                        @include('countries.delete_country', compact('country'))
                                     @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Title</th>
-                                        <th>Reward</th>
-                                        <th>Assigned User</th>
-                                        <th>Description</th>
-                                        <th>Start Date</th>
-                                        <th>End Date</th>
+                                        <th>Country Name</th>
+                                        <th>No. Districts</th>
+                                        <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </tfoot>

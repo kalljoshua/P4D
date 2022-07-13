@@ -26,15 +26,28 @@
             </a>
             
           </li>
-
           <li class="nav-item">
-            <a href="{{ route('countries') }}" class="nav-link">
-              <i class="nav-icon fas fa-money-check"></i>
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-flag"></i>
               <p>
                 Countries
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('countries') }}" class="nav-link">
+                  <i class="fas fa-list nav-icon"></i>
+                  <p>All Countries</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('add-country') }}" class="nav-link">
+                  <i class="fas fa-plus nav-icon"></i>
+                  <p>Add Countries</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">

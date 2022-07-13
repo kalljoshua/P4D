@@ -15,4 +15,19 @@ class CountryService
     {
         return $this->repository->getCountries();
     }
+
+    public function postCountry($request)
+    {
+        return $this->repository->postCountry($request);
+    }
+
+    public function editCountry($request, $countryId)
+    {
+        return $this->repository->editCountry($request, $countryId);
+    }
+
+    public function deleteCountry($countryId)
+    {
+        return $this->repository->deleteCountry($countryId);
+    }
 }

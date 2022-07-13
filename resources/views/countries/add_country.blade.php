@@ -31,7 +31,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <!-- form start -->
-                        <form action="{{ route('add-action-lists') }}" method="POST">
+                        <form action="{{ route('post-country') }}" method="POST">
                             @csrf
                             <div class="card-body col-md-8 justify-content-center">
                                 <div class="form-group">

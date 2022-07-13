@@ -26,12 +26,14 @@ Route::get('/dashboard', 'App\Http\Controllers\DashboardController@dashboard')->
 Route::get('/countries', 'App\Http\Controllers\CountriesController@getCountries')->name('countries');
 Route::get('/add-country', 'App\Http\Controllers\CountriesController@addCountry')->name('add-country');
 Route::post('/add-country', 'App\Http\Controllers\CountriesController@postCountry')->name('post-country');
+Route::post('/{country_id}/delete-country', 'App\Http\Controllers\CountriesController@deleteCountry')->name('delete-country');
+Route::post('/{country_id}/edit-country', 'App\Http\Controllers\CountriesController@editCountry')->name('edit-country');
 
-Route::get('/districts/{countryId}', 'App\Http\Controllers\DistrictsController@getDistricts')->name('districts');
+Route::get('/districts', 'App\Http\Controllers\DistrictsController@getDistricts')->name('districts');
 Route::get('/add-district', 'App\Http\Controllers\DistrictsController@addDistrict')->name('add-district');
 Route::post('/add-district', 'App\Http\Controllers\DistrictsController@postDistrict')->name('post-district');
 
-Route::get('/sectors/{districtId}', 'App\Http\Controllers\SectorsController@getSectors')->name('sectors');
+Route::get('/sectors', 'App\Http\Controllers\SectorsController@getSectors')->name('sectors');
 Route::get('/add-sectors', 'App\Http\Controllers\SectorsController@addSector')->name('add-sector');
 Route::post('/add-sectors/{districtId}', 'App\Http\Controllers\SectorsController@postSector')->name('post-sector');
 
