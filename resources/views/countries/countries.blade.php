@@ -60,10 +60,12 @@
                                             <td>{{ count($country['districts']) }}</td>
                                             <td>{{ $country['enabled'] }}</td>
                                             <td> <button type="button" class="btn btn-default" data-toggle="modal"
-                                                    data-target="#modal-edit-country"> <i class="fas fa-edit"></i></button>
+                                                    data-target="#modal-edit-country{{ $country['id'] }}"> <i
+                                                        class="fas fa-edit"></i></button>
 
                                                 <button type="button" class="btn btn-default" data-toggle="modal"
-                                                    data-target="#modal-delete-country"> <i class="fas fa-trash"></i>
+                                                    data-target="#modal-delete-country{{ $country['id'] }}"> <i
+                                                        class="fas fa-trash"></i>
                                                 </button>
                                             </td>
                                         </tr>

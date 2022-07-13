@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal-edit-country">
+<div class="modal fade" id="modal-edit-country{{$country['id']}}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

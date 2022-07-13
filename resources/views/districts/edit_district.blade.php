@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal-edit-district">
+<div class="modal fade" id="modal-edit-district{{$district['id']}}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
