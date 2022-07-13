@@ -1,8 +1,8 @@
-<div class="modal fade" id="modal-delete-country">
+<div class="modal fade" id="modal-delete-district">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Delete {{ $country['name'] }}</h4>
+                <h4 class="modal-title">Delete {{ $district['name'] }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -14,15 +14,15 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <!-- form start -->
-                            <form action="{{ route('delete-country', ['country_id' => $country['id']]) }}" method="POST">
+                            <form action="{{ route('delete-district', ['district_id' => $district['id']]) }}" method="POST">
                                 @csrf
                                 <div class="card-body col-md-12">
 
                                     <div class="section-description section-description-inline">
-                                        <h1>Delete {{ $country['name'] }}</h1>
+                                        <h1>Delete {{ $district['name'] }}</h1>
                                     </div>
                                     <div>
-                                        <span>Are you sure you want to delete this Country?</span>
+                                        <span>Are you sure you want to delete this District?</span>
                                     </div>
 
                                 </div>

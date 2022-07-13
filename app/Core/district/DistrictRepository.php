@@ -18,7 +18,15 @@ class DistrictRepository implements IDistrictRepository
         $this->client = $client;
     }
 
-    public function getDistricts($countryId)
+    public function getDistricts()
+    {
+        $response = $this->client->get('/district/get/all');
+        $data = $response->getBody();
+        $assoc = json_decode($data, true);
+        return $assoc;
+    }
+
+    public function getCountryDistricts($countryId)
     {
         $response = $this->client->get('/district/get/all/' . $countryId);
         $data = $response->getBody();

@@ -16,6 +16,11 @@ class CountryService
         return $this->repository->getCountries();
     }
 
+    public function getCountry($countryId)
+    {
+        return $this->repository->getCountry($countryId);
+    }
+
     public function postCountry($request)
     {
         return $this->repository->postCountry($request);

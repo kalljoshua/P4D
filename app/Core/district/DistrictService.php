@@ -11,9 +11,14 @@ class DistrictService
         $this->repository = $repository;
     }
 
-    public function getDistricts($countryId)
+    public function getDistricts()
     {
-        return $this->repository->getDistricts($countryId);
+        return $this->repository->getDistricts();
+    }
+
+    public function getCountryDistricts($countryId)
+    {
+        return $this->repository->getCountryDistricts($countryId);
     }
 
     public function postDistricts($request)

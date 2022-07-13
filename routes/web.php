@@ -30,8 +30,11 @@ Route::post('/{country_id}/delete-country', 'App\Http\Controllers\CountriesContr
 Route::post('/{country_id}/edit-country', 'App\Http\Controllers\CountriesController@editCountry')->name('edit-country');
 
 Route::get('/districts', 'App\Http\Controllers\DistrictsController@getDistricts')->name('districts');
+Route::get('/country-districts', 'App\Http\Controllers\DistrictsController@getCountryDistricts')->name('country-districts');
 Route::get('/add-district', 'App\Http\Controllers\DistrictsController@addDistrict')->name('add-district');
 Route::post('/add-district', 'App\Http\Controllers\DistrictsController@postDistrict')->name('post-district');
+Route::post('/{district_id}/delete-district', 'App\Http\Controllers\CountriesController@deleteDistrict')->name('delete-district');
+Route::post('/{district_id}/edit-district', 'App\Http\Controllers\CountriesController@editDistrict')->name('edit-district');
 
 Route::get('/sectors', 'App\Http\Controllers\SectorsController@getSectors')->name('sectors');
 Route::get('/add-sectors', 'App\Http\Controllers\SectorsController@addSector')->name('add-sector');

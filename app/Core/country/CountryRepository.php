@@ -28,6 +28,14 @@ class CountryRepository implements ICountryRepository
         return $assoc;
     }
 
+    public function getCountry($countryId)
+    {
+        $response = $this->client->get('/country/get/'. $countryId);
+        $data = $response->getBody();
+        $assoc = json_decode($data, true);
+        return $assoc;
+    }
+
     public function postCountry($request)
     {
         $userToken = Session::get('userToken');

@@ -21,7 +21,13 @@ class DistrictsController extends Controller
     }
 
     //
-    public function getDistricts($countryId)
+    public function getDistricts()
+    {
+        $districts = $this->district_service->getDistricts();
+        return view('districts.districts', compact('districts'));
+    }
+
+    public function getCountryDistricts($countryId)
     {
         $countries = $this->district_service->getDistricts($countryId);
         return view('admin.goals.goals', compact('countries'));
