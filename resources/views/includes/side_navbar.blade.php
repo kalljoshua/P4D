@@ -26,15 +26,6 @@
             </a>
             
           </li>
-          <li class="nav-item">
-            <a href="" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-                Sectors
-              </p>
-            </a>
-            
-          </li>
 
           <li class="nav-item">
             <a href="{{ route('countries') }}" class="nav-link">
@@ -57,13 +48,37 @@
               <li class="nav-item">
                 <a href="" class="nav-link">
                   <i class="fas fa-list nav-icon"></i>
-                  <p>Savings Accounts</p>
+                  <p>All Districts</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="" class="nav-link">
+                  <i class="fas fa-plus nav-icon"></i>
+                  <p>Add Districts</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-piggy-bank"></i>
+              <p>
+                Sectors
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="" class="nav-link">
                   <i class="fas fa-list nav-icon"></i>
-                  <p>Savings Transactions</p>
+                  <p>All Sectors</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="fas fa-plus nav-icon"></i>
+                  <p>Add Sectors</p>
                 </a>
               </li>
             </ul>
