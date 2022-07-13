@@ -46,13 +46,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{ route('districts') }}" class="nav-link">
                   <i class="fas fa-list nav-icon"></i>
                   <p>All Districts</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{ route('add-district') }}" class="nav-link">
                   <i class="fas fa-plus nav-icon"></i>
                   <p>Add Districts</p>
                 </a>
@@ -70,13 +70,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{ route('sectors') }}" class="nav-link">
                   <i class="fas fa-list nav-icon"></i>
                   <p>All Sectors</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{ route('add-sector') }}" class="nav-link">
                   <i class="fas fa-plus nav-icon"></i>
                   <p>Add Sectors</p>
                 </a>
