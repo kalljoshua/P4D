@@ -118,6 +118,12 @@
                   <p>Plan Files</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{ route('create-file') }}" class="nav-link">
+                  <i class="fas fa-plus nav-icon"></i>
+                  <p>Add Files</p>
+                </a>
+              </li>
             </ul>
           </li>
           

@@ -9,6 +9,7 @@ use App\Core\sector\SectorServiceFactory;
 class FilesController extends Controller
 {
     private $file_service;
+    private $sector_service;
 
     public function __construct()
     {
@@ -35,5 +36,20 @@ class FilesController extends Controller
     public function createPlan(Request $request)
     {
         $create_file = $this->file_service->getFiles();
+    }
+
+    public function addFile(Request $request){
+        $create_file = $this->file_service->createFile($request);
+        if ($create_file) {
+            flash()->success('File added successfully!');
+        } else {
+            flash()->error('Failed to Save File, please try again!');
+        }
+        return redirect()->route('files');
+    }
+
+    public function createFile(){
+        $sectors = $this->sector_service->getSectors();
+        return view('files.create_file', compact('sectors'));
     }
 }

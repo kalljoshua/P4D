@@ -2,6 +2,7 @@
 
 namespace App\Core\files;
 
+use Illuminate\Support\Facades\Session;
 use GuzzleHttp\Client;
 
 class FilesRepository implements IFilesRepository
@@ -19,17 +20,19 @@ class FilesRepository implements IFilesRepository
 
     public function getFiles()
     {
-        $response = $this->client->get('/files/get/all/');
+        $userToken = Session::get('userToken');
+        $response = $this->client->get('/budget/get/all', [
+            'headers' => ['Authorization' => 'Bearer ' . $userToken],
+        ]);
         $data = $response->getBody();
         $assoc = json_decode($data, true);
 
-        dd($assoc);
         return $assoc;
     }
 
     public function getBudgetFiles()
     {
-        $response = $this->client->get('/files/get/all/');
+        $response = $this->client->get('/budget/get/all/');
         $data = $response->getBody();
         $assoc = json_decode($data, true);
 
@@ -39,7 +42,7 @@ class FilesRepository implements IFilesRepository
 
     public function getPlanFiles()
     {
-        $response = $this->client->get('/files/get/all/');
+        $response = $this->client->get('/plan/get/all/');
         $data = $response->getBody();
         $assoc = json_decode($data, true);
 
@@ -48,54 +51,52 @@ class FilesRepository implements IFilesRepository
     }
 
     public function createFile($request)
-    {
+    { 
         $userToken = $request->session()->get('userToken');
         if ($request->file_type == 'plan') {
-            $response = $this->client->post(
-                '/plan/add',
-                [
-                    'headers' => ['Authorization' => 'Bearer ' . $userToken],
-                    'multipart' => [
-                        'name'     => 'file',
-                        'contents' => fopen($request->file, 'r'),
-                        'headers'  => ['Content-Type' => 'pdf']
-                    ],
-                    'json' => [
-                        [
-                        'sectorId' => $request->sectorId,
-                        'title' => $request->title,
-                        'year' => $request->year,
-                        ]
-
-                    ]
-                ]
-            );
+            $data = $this->upload_files($userToken, 'plan', $request);
         } else if ($request->file_type == 'budget') {
-            $response = $this->client->post(
-                '/budget/add',
-                [
-                    'headers' => ['Authorization' => 'Bearer ' . $userToken],
-                    'multipart' => [
-                        'name'     => 'file',
-                        'contents' => fopen($request->file, 'r'),
-                        'headers'  => ['Content-Type' => 'pdf']
-                    ],
-                    'json' => [
-                        [
-                        'sectorId' => $request->sectorId,
-                        'title' => $request->title,
-                        'year' => $request->year,
-                        ]
-
-                    ]
-                ]
-            );
+            $data = $this->upload_files($userToken, 'budget', $request);
         }
 
-        $data = $response->getBody();
         $assoc = json_decode($data, true);
-
         dd($assoc);
         return $assoc;
+    }
+
+    private function upload_files($userToken, $type, $request)
+    {
+        $name = $request->file('file')->getClientOriginalName();
+        //dd($name);
+        $fileinfo = array(
+            'name'          =>  $name,
+            'type'          =>  'pdf',
+        );
+        $response = $this->client->post(
+            '/' . $type . '/add',
+            [
+                'headers' => ['Authorization' => 'Bearer ' . $userToken, 'Content-Type' => 'text/plain',],
+                'multipart' => [
+                    [
+                        'name'     => $name,
+                        'contents' => fopen($request->file, 'r'),
+                        'headers' => ['Content-Type' => 'pdf'],
+                    ]
+                ],
+                'json' => [
+                    [
+                        'file' => [
+                            'name'     => [$name],
+                            'contents' => [json_encode($fileinfo)],
+                        ],
+                        'sectorId' => [$request->sectorId],
+                        'title' => [$request->title],
+                        'year' => [90, 90],
+                    ]
+
+                ]
+            ]
+        );
+        return $response->getBody();
     }
 }

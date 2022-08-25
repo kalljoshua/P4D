@@ -48,8 +48,8 @@
                                     <select name="sectorId" id="sector-id" class="form-control">
                                         <option value="">Select Sector</option>
                                         @foreach ($sectors as $sector)
-                                            <option value="{{ $sector->id }}">
-                                                {{ $sector->name }}
+                                            <option value="{{ $sector['id'] }}">
+                                                {{ $sector['name'] }}
                                             </option>
                                         @endforeach
                                     </select>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Core\authentication\AuthServiceFactory;
 use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class AuthController extends Controller
 {
@@ -23,20 +24,24 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $login = $this->auth_service->login($request);
-        $respose = $login->getBody()->getContents();
-        //dd(json_decode($respose, true)['jwt']);
+        try {
+            $login = $this->auth_service->login($request);
+            $respose = $login->getBody()->getContents();
+            //dd(json_decode($respose, true)['jwt']);
 
-        if ($login) {
-            $request->session()->forget('userToken');
-            $request->session()->put('userToken', json_decode($respose, true)['jwt']);
-            flash()->success('Login successfully!');
-            return redirect()->route('dashboard');
+            if ($login) {
+                $request->session()->forget('userToken');
+                $request->session()->put('userToken', json_decode($respose, true)['jwt']);
+                flash()->success('Login successfully!');
+                return redirect()->route('dashboard');
+            }
+        } catch (Exception $e) {
+            flash()->error('Failed to Login, Check your credentials, internet conection and try again!');
+            return redirect()->route('login-form');
+            echo 'Message: ' . $e->getMessage();
         }
-
-        flash()->error('Failed to Login, please try again!');
-        return redirect('login')->with('error', 'Oppes! You have entered invalid credentials');
     }
+
 
 
     public function logout(Request $request)
