@@ -1,4 +1,0 @@
-deployment:
-  tasks:
-    - export DEPLOYPATH=/python/ramuzat/public_html/matrix
-    - /bin/cp -R * $DEPLOYPATH
