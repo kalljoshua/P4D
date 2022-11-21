@@ -36,7 +36,6 @@ class FilesRepository implements IFilesRepository
         $data = $response->getBody();
         $assoc = json_decode($data, true);
 
-        dd($assoc);
         return $assoc;
     }
 
@@ -46,12 +45,12 @@ class FilesRepository implements IFilesRepository
         $data = $response->getBody();
         $assoc = json_decode($data, true);
 
-        dd($assoc);
+        //dd($assoc);
         return $assoc;
     }
 
     public function createFile($request)
-    { 
+    {
         $userToken = $request->session()->get('userToken');
         if ($request->file_type == 'plan') {
             $data = $this->upload_files($userToken, 'plan', $request);
@@ -66,37 +65,35 @@ class FilesRepository implements IFilesRepository
 
     private function upload_files($userToken, $type, $request)
     {
-        $name = $request->file('file')->getClientOriginalName();
-        //dd($name);
-        $fileinfo = array(
-            'name'          =>  $name,
-            'type'          =>  'pdf',
-        );
-        $response = $this->client->post(
-            '/' . $type . '/add',
+        if($request->file('file')){
+            $file= $request->file('file');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $path = public_path('public/files/');
+            $file-> move(public_path('public/files'), $filename);
+        }
+        $sectorId = $request->sectorId;
+        $title = $request->title;
+        $year = $request->year;
+
+        $response = $this->client->request(
+            'POST',
+            '/' . $type . '/add/' . $sectorId . '/' . $year . '/' . $title,
             [
-                'headers' => ['Authorization' => 'Bearer ' . $userToken, 'Content-Type' => 'text/plain',],
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $userToken,
+                    'Content-Type' => 'application/pdf',
+                    'Content-Length' => ''
+                ],
                 'multipart' => [
                     [
-                        'name'     => $name,
-                        'contents' => fopen($request->file, 'r'),
-                        'headers' => ['Content-Type' => 'pdf'],
-                    ]
+                        'name'     => 'file',
+                        'contents' => file_get_contents($path . $filename),
+                        'filename' => $filename
+                    ],
                 ],
-                'json' => [
-                    [
-                        'file' => [
-                            'name'     => [$name],
-                            'contents' => [json_encode($fileinfo)],
-                        ],
-                        'sectorId' => [$request->sectorId],
-                        'title' => [$request->title],
-                        'year' => [90, 90],
-                    ]
-
-                ]
             ]
         );
+
         return $response->getBody();
     }
 }

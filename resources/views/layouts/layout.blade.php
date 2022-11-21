@@ -92,7 +92,7 @@
     <!-- AdminLTE for demo purposes -->
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="/dist/js/pages/dashboard.js"></script>
-    
+
 
     <script>
         $('div.alert').not('.alert-important').delay(4000).slideUp(300);

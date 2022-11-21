@@ -18,7 +18,16 @@ use Illuminate\Support\Facades\Route;
 }); */
 
 
-Route::get('/', 'App\Http\Controllers\AuthController@login_form')->name('login-form');
+
+Route::get('/', 'App\Http\Controllers\user\HomeController@home')->name('home');
+Route::get('/files', 'App\Http\Controllers\user\FilesController@getFiles')->name('files');
+Route::get('/plan-files', 'App\Http\Controllers\user\FilesController@getPlanFiles')->name('plan_files');
+Route::get('/budget-files', 'App\Http\Controllers\user\FilesController@getBudgetFiles')->name('budget_files');
+Route::get('/year-files', 'App\Http\Controllers\user\FilesController@getYearFiles')->name('year_files');
+Route::get('/contact-us', 'App\Http\Controllers\user\HomeController@contact')->name('contact');
+Route::post('/{file_id}/file-details', 'App\Http\Controllers\user\HomeController@getFileDetails')->name('get_file_details');
+Route::get('/file-details', 'App\Http\Controllers\user\HomeController@fileDetails')->name('file_details');
+//Route::get('/', 'App\Http\Controllers\AuthController@login_form')->name('login-form');
 Route::post('/login', 'App\Http\Controllers\AuthController@login')->name('login');
 Route::get('/logout', 'App\Http\Controllers\AuthController@logout')->name('logout');
 Route::get('/dashboard', 'App\Http\Controllers\DashboardController@dashboard')->name('dashboard');
@@ -51,7 +60,7 @@ Route::get('/budgets', 'App\Http\Controllers\FilesController@getBudgetFiles')->n
 Route::get('/create-budget', 'App\Http\Controllers\FilesController@createBudget')->name('create-budget');
 Route::post('/add-budget', 'App\Http\Controllers\FilesController@addBudget')->name('add-budget');
 
-Route::get('/files', 'App\Http\Controllers\FilesController@getFiles')->name('files');
+//Route::get('/files', 'App\Http\Controllers\FilesController@getFiles')->name('files');
 Route::get('/create-file', 'App\Http\Controllers\FilesController@createFile')->name('create-file');
 Route::post('/add-file', 'App\Http\Controllers\FilesController@addFile')->name('add-file');
 Route::post('/{file_id}/edit-file', 'App\Http\Controllers\FilesController@editFile')->name('edit-file');

@@ -58,7 +58,7 @@
                                 <tbody>
                                     @foreach ($files as $file)
                                         <tr>
-                                            <td>{{ $file->title }}</td>
+                                            <td>{{ $file['title'] }}</td>
                                             <td>{{ $file->file_url }}</td>
                                             <td>{{ $file->sector }}</td>
                                             <td>{{ $file->district }}</td>
